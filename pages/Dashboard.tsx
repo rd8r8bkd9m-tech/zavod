@@ -7,6 +7,9 @@ import { useAppStore } from '../store/useAppStore';
 import { ContentStatus, Platform } from '../types';
 import { useNavigate } from 'react-router-dom';
 
+// Constants
+const MS_PER_DAY = 86400000;
+
 export const Dashboard: React.FC = () => {
   const { credits, library, addCredits, campaigns } = useAppStore();
   const navigate = useNavigate();
@@ -176,7 +179,7 @@ export const Dashboard: React.FC = () => {
                   </div>
                 </div>
                 <span className="text-xs font-medium text-slate-400 dark:text-zinc-500">
-                  {new Date(Date.now() - (6 - i) * 86400000).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }).slice(0, 5)}
+                  {new Date(Date.now() - (6 - i) * MS_PER_DAY).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }).slice(0, 5)}
                 </span>
               </div>
             ))}

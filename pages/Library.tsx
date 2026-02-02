@@ -188,7 +188,12 @@ export const Library: React.FC = () => {
                       type="checkbox" 
                       className="rounded border-slate-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500 bg-white dark:bg-zinc-900"
                       checked={selectedItems.includes(item.id)}
-                      onChange={(e) => toggleSelectItem(e as any, item.id)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        e.stopPropagation();
+                        setSelectedItems(prev => 
+                          prev.includes(item.id) ? prev.filter(i => i !== item.id) : [...prev, item.id]
+                        );
+                      }}
                     />
                   </td>
                   <td className="px-6 py-4">

@@ -8,6 +8,9 @@ interface AnimatedCounterProps {
   decimals?: number;
 }
 
+// Easing constant for exponential ease-out (higher value = faster deceleration)
+const EASE_OUT_EXPO_FACTOR = -10;
+
 export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   value,
   duration = 1000,
@@ -28,8 +31,9 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Easing function (ease-out-expo)
-      const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+      // Ease-out-expo: Creates smooth deceleration effect
+      // Formula: 1 - 2^(factor * progress), where factor controls deceleration speed
+      const easeOutExpo = 1 - Math.pow(2, EASE_OUT_EXPO_FACTOR * progress);
       
       const current = startValue + (endValue - startValue) * easeOutExpo;
       setDisplayValue(current);
