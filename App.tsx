@@ -25,15 +25,28 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className={theme === 'dark' ? 'dark' : ''}>
-        <div className="flex h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-200 font-sans selection:bg-indigo-500/30 transition-colors duration-300">
+        <div className="flex h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-200 font-sans selection:bg-indigo-500/30 transition-colors duration-300 overflow-hidden">
+          {/* Background decoration */}
+          <div className="fixed inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 dark:from-indigo-500/3 dark:via-purple-500/3 dark:to-pink-500/3 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-blue-500/5 via-cyan-500/5 to-teal-500/5 dark:from-blue-500/3 dark:via-cyan-500/3 dark:to-teal-500/3 rounded-full blur-3xl"></div>
+          </div>
+          
           <Sidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
           
           <main className="flex-1 overflow-auto relative">
             {/* Mobile Header */}
-            <div className="md:hidden flex items-center justify-between p-4 border-b border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 sticky top-0 z-20">
-              <span className="font-bold text-lg text-slate-900 dark:text-white">Контент-Завод</span>
+            <div className="md:hidden flex items-center justify-between p-4 border-b border-slate-200/50 dark:border-zinc-800/50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-20">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <span className="font-bold text-lg text-slate-900 dark:text-white">Контент-Завод</span>
+              </div>
               <button 
-                  className="p-2 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
+                  className="p-2 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
                   onClick={() => setIsMobileMenuOpen(true)}
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
